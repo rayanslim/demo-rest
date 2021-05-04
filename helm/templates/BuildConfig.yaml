@@ -1,0 +1,33 @@
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: demo-rest
+  labels:
+    app: demo-rest
+spec:
+  serviceAccount: builder
+  source:
+    type: Git
+    git:
+      uri: 'http://205.195.215.67:8080/tfs/IRCC/GCMS/_git/integration'
+      ref: master
+    contextDir: /sandbox/vlad/demo/demo-rest
+    sourceSecret:
+      name: tfs-vlad
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'fuse7-java-openshift:1.8'
+      env:
+        - name: MAVEN_MIRROR_URL
+          value: >-
+            http://nexus-repo-ircc.apps.ocp-ircc-lab.prod.brs.cloud-nuage.gc.ca/repository/red-hat-integration
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'demo-rest:latest'
+  triggers: []

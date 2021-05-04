@@ -1,0 +1,42 @@
+# Camel
+camel:
+  springboot:
+    name: demo-rest
+    tracing: false
+    
+##
+## Application Settings
+##
+
+service:
+  version: 0.0.1
+
+# lets listen on all ports to ensure we can be invoked from the pod IP server.address=0.0.0.0
+server:
+  address: localhost
+  port: 8081
+
+management:
+  address: localhost
+  server:
+    # lets use a different management port in case you need to listen to HTTP requests on 8080
+    port: 8081
+
+    # enable management endpoints for healthchecks and hawtio
+    endpoints:
+      enabled: false
+      health:
+        enabled: true
+
+##
+## Endpoint properties
+##
+
+ep:
+  # REST
+  rest:
+    component: undertow
+    scheme: http
+    host: localhost
+    port: 9292
+    

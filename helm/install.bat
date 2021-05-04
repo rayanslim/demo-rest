@@ -1,0 +1,1 @@
+helm install demo-rest . -n sandbox-vlad --atomic

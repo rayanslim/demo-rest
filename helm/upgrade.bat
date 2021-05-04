@@ -1,0 +1,1 @@
+helm upgrade demo-rest . -n sandbox-vlad --atomic
